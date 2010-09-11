@@ -1,0 +1,32 @@
+# ChangeLog for x11-misc/swarp
+# Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+  15 Jan 2010; Michał Górny (sedzimir) <gentoo@mgorny.alt.pl>
+  -swarp-9999.ebuild:
+  Dropping live version as it differs from stable one only by copyright list,
+  and there has been no change for more than three years.
+
+  15 Jan 2010; Michał Górny (sedzimir) <gentoo@mgorny.alt.pl>
+  swarp-0.1.ebuild:
+  General polishing and SRC_URI update.
+
+  18 Nov 2009; Justin Lecher (jlec) <jlec@j-schmitz.net> swarp-0.1.ebuild,
+  swarp-9999.ebuild:
+  HOMEPAGE fixed
+
+  04 Dec 2007; Jakub Moc <jakub@gentoo.org> swarp-0.1.ebuild,
+  swarp-9999.ebuild:
+  Add ~amd64 keyword
+
+  10 Dec 2006; Jakub Moc <jakub@gentoo.org> swarp-9999.ebuild:
+  Fix nonsensical KEYWORDS
+
+  13 Oct 2006; Cedric Krier <ced@ced.homedns.org> +swarp-0.1.ebuild,
+  swarp-9999.ebuild:
+  Version bump
+
+  12 Oct 2006; Cedric Krier <ced@ced.homedns.org> +swarp-9999.ebuild,
+  +metadata.xml:
+  New Ebuild for bug 151067
+

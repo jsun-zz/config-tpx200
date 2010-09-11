@@ -1,0 +1,2 @@
+LDPATH="/usr/games/lib:/usr/games/lib64:/usr/games/lib32"
+PATH="/usr/games/bin"

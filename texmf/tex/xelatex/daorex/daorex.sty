@@ -1,0 +1,178 @@
+\ProvidesPackage{daorex}
+
+
+
+% \usepackage{fontspec}           % 用XeTeX排版中文需要用到的一个宏包, 现在被xeCJK取代
+% \usepackage{indentfirst}        % 自动首行缩进, 也被xeCJK取代
+\usepackage{xeCJK}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+
+
+
+\usepackage{graphicx}           % 插入图片需要的宏包
+\usepackage{amsmath}            % AMS的数学宏包, 有时需要用到其中的一些数学符号
+\usepackage{amsfonts}     		% AMS的數學字體，有\hbar
+\usepackage{amsbsy}
+\usepackage{textcomp}
+\usepackage{color}              % 可以定义各种颜色
+\usepackage{framed}             % 显示代码环境的制作需要用到
+\usepackage{float}              % 强大的浮动环境控制宏包
+\usepackage[pagestyles]{titlesec} % 定制页眉页脚
+
+\usepackage[stable]{footmisc}  % 章节脚注补丁
+\usepackage{listings}		% 提供lstlisting环境，显示代码及行号
+\lstset{%numbers=left, numberstyle=\tiny,
+keywordstyle=\color{blue!70}, commentstyle=\color{red!50!green!50!blue!50}, frame=shadowbox, rulesepcolor=\color{red!20!green!20!blue!20},escapeinside=``, xleftmargin=2em,xrightmargin=2em, aboveskip=1em}
+
+
+\usepackage[x11names]{xcolor}     % 下面的RoyalBlue3颜色需要用到的宏包
+\usepackage[pdfauthor={Tao Honker},%
+            pdftitle={Tao Honker's Work, CopyRight Reserved.},%
+            colorlinks=true,%
+            urlcolor=blue,%
+            linkcolor=RoyalBlue3,unicode]{hyperref} % 为超链接增加颜色, 还有一些其它的好用功能
+\usepackage[top=1.3in,bottom=0.8in,left=1.05in,right=1.05in]{geometry} % 设置页边距
+\usepackage{xCJKnumb}
+
+% 自定义页眉、页脚
+\usepackage{fancyhdr}
+\pagestyle{plain}
+\lhead{}
+\chead{}
+\rhead{}
+%\renewcommand{\chaptermark}[1]{\markboth{第\xCJKnumber{\thechapter{}}章\ #1}{}}
+%\lfoot{From: K. Grant}
+\cfoot{}
+%\rfoot{\thepage} 
+
+% 中文断行
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+% 映射字体名称，以便维护
+\newcommand\fontnamehei{微软雅黑}
+\newcommand\fontnamesong{宋体}
+\newcommand\fontnamekai{楷体}
+
+\newcommand\fontnameroman{Cambria}
+\newcommand\fontnamesans{Calibri}
+\newcommand\fontnamemono{YaHei Consolas Hybrid}
+
+% 设置文档正文字体为宋体
+%\setmainfont{Avant Garde}
+%\setsansfont{Droid Sans}
+%\setmonofont{Droid Sans Mono}
+
+\setCJKmainfont[BoldFont=SimHei,ItalicFont=KaiTi]{SimSun}
+\setCJKmonofont[Scale=0.9]{YaHei Consolas Hybrid}
+\setCJKfamilyfont{song}[BoldFont=宋体]{宋体}
+\setCJKfamilyfont{sf}[BoldFont=楷体]{黑体}
+
+
+% 楷体
+%\newfontinstance\KAI{\fontnamekai}
+%\newcommand{\kai}[1]{{\KAI #1}}
+
+% 黑体
+%\newfontinstance\HEI{\fontnamehei}
+%\newcommand{\hei}[1]{{\HEI #1}}
+
+% 英文
+% \newfontinstance\ENF{\fontnameroman}
+% \newcommand{\en}[1]{\,{\ENF #1}\,}
+% \newcommand{\EN}{\,\ENF\,}
+
+
+
+% 自定义的几种颜色
+%\definecolor{shadecolor}{gray}{0.85}
+%\definecolor{darkblue}{RGB}{52,101,164}
+%\definecolor{darkgreen}{RGB}{78,154,6}
+
+% 设置背景颜色
+% \definecolor{bisque}{rgb}{.996,.891,.755}
+% \pagecolor{bisque}
+
+
+% 设置原文照排环境的字体
+% \makeatletter
+% \def\verbatim@font{\sffamily\small}
+% \makeatother
+
+% 设置chapter, section与subsection的格式
+\titleformat{\part}{\centering\huge}{\textbf{第\xCJKnumber{\arabic{part}}部}}{1em}{\textbf}
+\titleformat{\chapter}{\centering\huge}{\textbf{第\xCJKnumber{\thechapter{}}章}}{1em}{\textbf}
+\titleformat{\section}{\centering\LARGE}{\textbf{\thesection}}{1em}{\textbf}
+\titleformat{\subsection}{\Large}{\textbf{\thesubsection}}{1em}{\textbf}
+
+% 设置页眉页脚
+%\newpagestyle{main}{%
+%  \sethead[$\cdot$~\thepage~$\cdot$][][\thesection\quad%
+%  \sectiontitle]{\thesection\quad\sectiontitle}{}{%
+%  $\cdot$~\thepage~$\cdot$}%
+%  \setfoot{}{}{}\headrule}
+%\pagestyle{main}
+%\renewpagestyle{plain}{\sethead{}{}{}\setfoot{}{}{}}
+
+% 去掉表头中的冒号
+\makeatletter
+\long\def\@makecaption#1#2{%
+\vskip\abovecaptionskip
+\sbox\@tempboxa{#1~~#2}%
+\ifdim \wd\@tempboxa >\hsize
+   #1~~#2\par
+\else
+   \global \@minipagefalse
+   \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+\fi
+\vskip\belowcaptionskip}
+\makeatother
+
+% 将默认的英文重定义为中文
+
+\renewcommand\contentsname{目录}
+\renewcommand\listfigurename{插图列表}
+\renewcommand\listtablename{表格列表}
+%\renewcommand\refname{参考文献}
+\renewcommand\indexname{索引}
+\renewcommand\figurename{图}
+\renewcommand\tablename{表}
+\renewcommand\partname{部分}
+\renewcommand\appendixname{附录}
+%\renewcommand\abstractname{摘要}
+
+\setlength{\parindent}{2.22em}  % 设置首行缩进的距离
+\linespread{1.3}                % 设置行距
+
+% XeTeX logo
+\def\XeTeX{\leavevmode
+  \setbox0=\hbox{X\lower.5ex\hbox{\kern-.15em\reflectbox{E}}\kern-.1667em
+   \TeX}%
+  \dp0=0pt\ht0=0pt\box0}
+  
+% XeLaTeX logo
+\def\XeLaTeX{\leavevmode
+  \setbox0=\hbox{X\lower.5ex\hbox{\kern-.15em\reflectbox{E}}\kern-.1667em 
+    \LaTeX}%
+  \dp0=0pt\ht0=0pt\box0}
+
+% 定义一些排版环境
+
+% 定义一些数学符号、简写
+\usepackage{bm} %提供\bm{}来表达向量
+\newcommand{\df}{\,\mathrm{d}} % 微分号 d
+\newcommand{\me}{\mathrm{e}} % 自然对数 e
+\newcommand{\mi}{\mathrm{i}} % 虚数单位 i
+
+% 定义集合R、C
+\newcommand{\setR}{\Bbb R}
+\newcommand{\secC}{\Bbb C}
+
+% 定义Dirac符号braket
+%\newcommand{\bra}{\left<}
+%\newcommand{\ket}{\right>}
+\usepackage{braket} % 提供\Braket \braket \Bra \ket etc.
+
+% 作者名
+\author{$\tau$,\,$\hbar$} 

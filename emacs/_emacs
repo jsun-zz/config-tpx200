@@ -1,0 +1,147 @@
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(inhibit-startup-screen t)
+ '(preview-fast-dvips-command "pdftops -origpagesizes %s.pdf %m/preview.ps"))
+;; (custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ ;; '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "microsoft" :family "YaHei Consolas Hybrid")))))
+
+(add-hook 'LaTeX-mode-hook 
+   (lambda()
+     (setq TeX-auto-save t)
+     (setq LaTeX-command-style 
+    (quote (("\\`fontspec\\'" "xelatex ") 
+     ("" "%(PDF)%(latex) %S%(PDFout)"))))
+     (custom-set-variables
+      '(preview-fast-dvips-command "pdftops -origpagesizes %s.pdf %m/preview.ps"))
+     (setq TeX-save-query nil)
+     (setq TeX-parse-self t)
+     (setq-default TeX-master nil)
+     (setq TeX-output-view-style
+    (cons '("^pdf$" "." "evince  %o ") TeX-output-view-style))
+     (set-default 'preview-default-document-pt 12)
+     (set-default 'preview-scale-function 1.2)
+     (setq preview-required-option-list 
+    (quote ("active" "tightpage" "auctex" "pdftex" (preview-preserve-counters "counters"))))
+     (setq preview-default-option-list 
+    (quote ("displaymath" "floats" "graphics" "textmath" "showlabels" "sections" )))
+     (TeX-global-PDF-mode t)))
+
+
+;;;;;;;;;;;;;;;;;;
+;; w3m settings ;;
+;;;;;;;;;;;;;;;;;;
+(setq w3m-command-arguments '("-cookie" "-F"))
+(setq w3m-use-cookies t)
+
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Font settings stuff ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun qiang-font-existsp (font)
+  (if (null (x-list-fonts font))
+      nil t))
+
+(defun qiang-make-font-string (font-name font-size)
+  (if (and (stringp font-size) 
+           (equal ":" (string (elt font-size 0))))
+      (format "%s%s" font-name font-size)
+    (format "%s %s" font-name font-size)))
+
+;; Qiang font setting function
+(defun qiang-set-font (english-fonts
+                       english-font-size
+                       chinese-fonts
+                       &optional chinese-font-size)
+  "english-font-size could be set to \":pixelsize=18\" or a integer.
+If set/leave chinese-font-size to nil, it will follow english-font-size"
+  (require 'cl)                         ; for find if
+  (let ((en-font (qiang-make-font-string
+                  (find-if #'qiang-font-existsp english-fonts)
+                  english-font-size))
+        (zh-font (font-spec :family (find-if #'qiang-font-existsp chinese-fonts)
+                            :size chinese-font-size)))
+ 
+    ;; Set the default English font
+    ;; 
+    ;; The following 2 method cannot make the font settig work in new frames.
+    ;; (set-default-font "Consolas:pixelsize=18")
+    ;; (add-to-list 'default-frame-alist '(font . "Consolas:pixelsize=18"))
+    ;; We have to use set-face-attribute
+    (message "Set English Font to %s" en-font)
+    (set-face-attribute
+     'default nil :font en-font)
+ 
+    ;; Set Chinese font 
+    ;; Do not use 'unicode charset, it will cause the english font setting invalid
+    (message "Set Chinese Font to %s" zh-font)
+    (dolist (charset '(kana han symbol cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font)
+                        charset
+                        zh-font))))
+
+;; Fonts settings
+(qiang-set-font
+ '( "Droid Sans Mono" "DejaVu Sans Mono"  "Droid Sans Mono" "Monospace" "Courier New") ":pixelsize=15"
+ '( "方正启体_GBK""文泉驿等宽正黑" "楷体" "华文细黑" "WenQuanYi Bitmap Song" "文泉驿等宽微米黑"   "黑体" "新宋体" "宋体")20)
+
+
+;;;;;;;;;;;;;;;;;
+;; Color Theme ;;
+;;;;;;;;;;;;;;;;;
+
+(require 'color-theme)			
+(load-file "~/.emacs.d/themes/color-theme-blackboard.el")
+(eval-after-load "color-theme"
+  '(progn
+     (color-theme-initialize)
+     (color-theme-blackboard)))
+
+
+
+
+;;;;;;;;;;;;;
+;; Comment ;;
+;;;;;;;;;;;;;
+
+(defun qiang-comment-dwim-line (&optional arg)
+  "Replacement for the comment-dwim command.
+If no region is selected and current line is not blank and we are not at the end of the line,
+then comment current line.
+Replaces default behaviour of comment-dwim, when it inserts comment at the end of the line."
+  (interactive "*P")
+  (comment-normalize-vars)
+  (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
+      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+    (comment-dwim arg)))
+(global-set-key "\M-;" 'qiang-comment-dwim-line)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;
+;; Org Mode Settings ;;
+;;;;;;;;;;;;;;;;;;;;;;;
+(require 'org-install)
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+(add-hook 'org-mode-hook 'trun-on-font-lock) ; not needed whem global-font-lock-mode is on
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+(put 'scroll-left 'disabled nil)

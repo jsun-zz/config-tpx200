@@ -1,0 +1,79 @@
+10
+
+dir
+10378
+svn://overlays.gentoo.org/proj/sunrise/reviewed/x11-plugins
+svn://overlays.gentoo.org/proj/sunrise
+
+
+
+2010-04-02T08:33:08.660306Z
+10378
+jlec
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+12608f7e-a915-0410-b2f3-ce240db1b126
+
+pidgin-birthday-reminder
+dir
+
+gdivelog-suunto-plugin
+dir
+
+pidgin-embeddedvideo
+dir
+
+gdivelog-hyperaqualand-plugin
+dir
+
+gdivelog-sensuspro-plugin
+dir
+
+pidgimpd
+dir
+
+pidgin-mbpurple
+dir
+
+pidgin-lastfm
+dir
+
+pidgin-sendscreenshot
+dir
+
+pidgin-autoanswer
+dir
+
+pidgin-botsentry
+dir
+
+desklet-gauges
+dir
+
+gkbinclock
+dir
+
+pidgin-extended-blist-sort
+dir
+
+pidgin-convreverse
+dir
+
+pidgin-audacious-remote
+dir
+
+deskbar-handlers-converter
+dir
+

@@ -1,0 +1,4 @@
+SAGE_ROOT="/usr/share/sage"
+SAGE_LOCAL="/usr"
+SAGE_DATA="/usr/share/sage/data"
+SAGE_DOC="/usr/share/sage/devel/sage/doc"

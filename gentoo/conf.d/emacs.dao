@@ -1,0 +1,30 @@
+# /etc/conf.d/emacs: config file for /etc/init.d/emacs.<user>
+# This can also be used as multiplexed configuration, i.e. runscript
+# looks for both /etc/conf.d/emacs and /etc/conf.d/emacs.<user>.
+
+# Absolute path to the Emacs binary
+#EMACS="/usr/bin/emacs"
+
+# Emacs detaches and exits the parent process only after loading the
+# user's .emacs (initialisation). Anything may happen there, so we use
+# a wrapper script to ensure that the Emacs daemon properly starts.
+# This also executes a login shell to read the user's profile. #246460
+EMACS_START="/usr/libexec/emacs/emacs-wrapper.sh"
+
+# Optionally, you may execute a custom script before stopping the
+# daemon. #246462
+#EMACS_STOP=""
+
+# Timeout (in seconds) to wait for the daemon to detach
+#EMACS_TIMEOUT="30"
+
+# Options to pass to Emacs. Don't remove "--daemon".
+#EMACS_OPTS="--daemon"
+
+# The SHELL variable to be passed to EMACS_START. emacs-wrapper.sh uses
+# this as the user's login shell. If (explicitely set to) empty, then
+# the shell field from the passwd file is used.
+#EMACS_SHELL="/bin/bash"
+
+# Enable additional output for debugging.
+#EMACS_DEBUG=""

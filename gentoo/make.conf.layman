@@ -1,0 +1,17 @@
+PORTDIR_OVERLAY="
+/var/lib/layman/gentoo-china
+/var/lib/layman/devnull
+/var/lib/layman/vmware
+/var/lib/layman/science
+/var/lib/layman/games
+/var/lib/layman/gnr
+/var/lib/layman/emacs
+/var/lib/layman/haskell
+/var/lib/layman/sage-on-gentoo
+/var/lib/layman/ub0rlay
+/var/lib/layman/sunrise
+/var/lib/layman/jyujin
+/var/lib/layman/portato
+$PORTDIR_OVERLAY
+/var/lib/layman/daorex
+/var/lib/layman/kvm"
