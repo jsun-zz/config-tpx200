@@ -107,7 +107,6 @@ XTerm*foreground:			white
 ! XTerm*scrollBar:			true
 XTerm*rightScrollBar:			true
 XTerm*jumpScroll:			true
-XTerm*titlebar:				false
 XTerm*SaveLines:			10000 
 XTerm*inputMethod:			fcitx
 ! 输入法的中英文切换，来自博客：
