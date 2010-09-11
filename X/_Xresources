@@ -107,7 +107,8 @@ XTerm*foreground:			white
 ! XTerm*scrollBar:			true
 XTerm*rightScrollBar:			true
 XTerm*jumpScroll:			true
-XTerm*SaveLines:			1000 
+XTerm*titlebar:				false
+XTerm*SaveLines:			10000 
 XTerm*inputMethod:			fcitx
 ! 输入法的中英文切换，来自博客：
 ! http://hi.baidu.com/cs_peanuts/blog/item/6c96efb7914ef3c437d3ca3b.html
